@@ -1,0 +1,10 @@
+# Configuración de despliegue para Netlify.
+# Netlify detecta Next.js automáticamente e instala su runtime oficial
+# (@netlify/plugin-nextjs); no es necesario declararlo aquí.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # Versión de Node usada en el build (LTS estable y compatible).
+  NODE_VERSION = "20"
