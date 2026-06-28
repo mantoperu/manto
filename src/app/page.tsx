@@ -2,6 +2,8 @@ import Link from "next/link";
 import {
   ArrowRight,
   MessageCircle,
+  Workflow,
+  Globe,
   Coffee,
   UtensilsCrossed,
   Briefcase,
@@ -27,6 +29,12 @@ import { WeavePattern } from "@/components/Weave";
 import { WeaveThread } from "@/components/WeaveThread";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { whatsappUrl, defaultQuoteMessage } from "@/lib/site";
+
+const heroHighlights = [
+  { icon: Workflow, label: "Automatización" },
+  { icon: Globe, label: "Webs profesionales" },
+  { icon: MessageCircle, label: "Atención por WhatsApp" },
+];
 
 const businessTypes = [
   { icon: Coffee, label: "Cafés" },
@@ -112,40 +120,70 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <WeavePattern className="absolute inset-0 text-petroleo/[0.06]" />
         <Container className="relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
-          <Stagger className="lg:col-span-7" playOnMount>
+          <Stagger
+            className="flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left"
+            playOnMount
+          >
             <StaggerItem>
-              <span className="inline-flex items-center gap-2 rounded-full border border-petroleo/20 bg-bone-50 px-3 py-1 text-xs font-medium uppercase tracking-[0.12em] text-petroleo">
+              <span className="inline-flex items-center gap-2 rounded-full border border-petroleo/20 bg-bone-50 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-petroleo sm:text-xs">
                 Agencia peruana de automatización y desarrollo web
               </span>
             </StaggerItem>
             <StaggerItem>
-              <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 text-balance font-display text-[2rem] font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
                 Manto automatiza tareas y desarrolla la web de tu negocio
               </h1>
             </StaggerItem>
+            {/* Ilustración animada: protagonista en móvil, oculta en desktop
+                (en desktop vive en su propia columna a la derecha). */}
+            <StaggerItem className="w-full lg:hidden">
+              <HeroArt className="mx-auto mt-8 w-56 max-w-[72%]" />
+            </StaggerItem>
             <StaggerItem>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-                Ayudamos a empresas y negocios de todo tamaño —cafés,
-                restaurantes, estudios, tiendas, comercios y compañías— a
-                automatizar tareas, ordenar su información, atender mejor por
-                WhatsApp y tener una presencia web profesional. Tecnología
-                práctica, sin complicaciones.
+              <p className="mt-8 max-w-md text-base leading-relaxed text-ink-muted sm:mt-6 sm:max-w-xl sm:text-lg">
+                Tecnología práctica que le da tiempo y orden a tu negocio, sin
+                complicaciones.
               </p>
             </StaggerItem>
             <StaggerItem>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href={whatsappUrl(defaultQuoteMessage)} size="lg">
+              <ul className="mt-6 flex flex-wrap justify-center gap-2.5 lg:justify-start">
+                {heroHighlights.map(({ icon: Icon, label }) => (
+                  <li
+                    key={label}
+                    className="inline-flex items-center gap-2 rounded-full border border-bone-300 bg-bone-50 px-3.5 py-1.5 text-sm font-medium text-ink"
+                  >
+                    <Icon
+                      className="h-4 w-4 text-petroleo"
+                      aria-hidden="true"
+                    />
+                    {label}
+                  </li>
+                ))}
+              </ul>
+            </StaggerItem>
+            <StaggerItem className="w-full sm:w-auto">
+              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <ButtonLink
+                  href={whatsappUrl(defaultQuoteMessage)}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
                   Solicitar cotización
                 </ButtonLink>
-                <ButtonLink href="/servicios" size="lg" variant="secondary">
+                <ButtonLink
+                  href="/servicios"
+                  size="lg"
+                  variant="secondary"
+                  className="w-full sm:w-auto"
+                >
                   Ver servicios
                   <ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </ButtonLink>
               </div>
             </StaggerItem>
           </Stagger>
-          <div className="lg:col-span-5">
+          <div className="hidden lg:col-span-5 lg:block">
             <HeroArt className="mx-auto w-full max-w-sm lg:max-w-none" />
           </div>
         </Container>
