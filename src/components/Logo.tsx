@@ -1,57 +1,36 @@
+/* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/cn";
 
+// Proporción del logo procesado (public/manto-logo*.png).
+const MARK_W = 897;
+const MARK_H = 641;
+
 /**
- * Isotipo de Manto.
+ * Isotipo de Manto: monograma "A·M" entrelazado con la trama de nodos.
  *
- * Concepto: una "M" formada por un hilo continuo (el manto que se pliega
- * en capas) atravesada por un segundo hilo que entra y sale —un tejido—
- * con dos nodos de conexión en los vértices. Geometría sobria que evoca
- * tejido, capas y conexión, sin caer en lo folclórico.
- *
- * Diseñado para leerse bien incluso a tamaño de favicon.
+ * Se sirve como PNG con fondo transparente, generado a partir del logo
+ * original con `scripts/process-logo.mjs`:
+ *   - variant "dark"  → tinta (#161412), para fondos claros.
+ *   - variant "light" → hueso (#F6F4EE), para fondos oscuros.
  */
-export function Isotipo({
+export function LogoMark({
   className,
-  title = "Isotipo de Manto",
+  variant = "dark",
+  alt = "Manto",
 }: {
   className?: string;
-  title?: string;
+  variant?: "dark" | "light";
+  alt?: string;
 }) {
+  const src = variant === "light" ? "/manto-logo-light.png" : "/manto-logo.png";
   return (
-    <svg
-      viewBox="0 0 40 40"
-      fill="none"
-      role="img"
-      aria-label={title}
-      className={className}
-    >
-      {/* Hilo principal en forma de M (capas que se pliegan) */}
-      <path
-        d="M8 31 V13 L20 25 L32 13 V31"
-        stroke="currentColor"
-        strokeWidth="3.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Hilo transversal entrelazado (entra y sale del tejido) */}
-      <path
-        d="M4 20 H15"
-        className="text-arcilla"
-        stroke="currentColor"
-        strokeWidth="3.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="M25 20 H36"
-        className="text-arcilla"
-        stroke="currentColor"
-        strokeWidth="3.4"
-        strokeLinecap="round"
-      />
-      {/* Nodos de conexión */}
-      <circle cx="8" cy="13" r="2.6" className="fill-arcilla" />
-      <circle cx="32" cy="13" r="2.6" className="fill-arcilla" />
-    </svg>
+    <img
+      src={src}
+      alt={alt}
+      width={MARK_W}
+      height={MARK_H}
+      className={cn("w-auto", className)}
+    />
   );
 }
 
@@ -60,22 +39,30 @@ export function Isotipo({
  */
 export function Logo({
   className,
+  variant = "dark",
+  showText = true,
   iconClassName,
   textClassName,
-  showText = true,
 }: {
   className?: string;
+  variant?: "dark" | "light";
+  showText?: boolean;
   iconClassName?: string;
   textClassName?: string;
-  showText?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
-      <Isotipo className={cn("h-7 w-7 text-petroleo", iconClassName)} />
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
+      {/* El nombre lo aporta el texto, así que la marca es decorativa. */}
+      <LogoMark
+        variant={variant}
+        alt={showText ? "" : "Manto"}
+        className={cn("h-8", iconClassName)}
+      />
       {showText && (
         <span
           className={cn(
-            "font-display text-xl font-semibold tracking-tight text-ink",
+            "font-display text-xl font-semibold tracking-tight",
+            variant === "light" ? "text-bone-50" : "text-ink",
             textClassName,
           )}
         >

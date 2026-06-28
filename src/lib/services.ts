@@ -8,6 +8,24 @@ import {
   MonitorSmartphone,
 } from "lucide-react";
 
+/** Ejemplo/visual mostrado en un servicio. */
+export type WebExample = {
+  /** Imagen del ejemplo en /public. */
+  image: string;
+  /** Texto alternativo accesible. */
+  alt: string;
+  /**
+   * Dominio para la barra del navegador. Si se define, se muestra como un
+   * sitio web (con barra de URL y desplazamiento automático); si no, se
+   * muestra como una imagen enmarcada estática.
+   */
+  host?: string;
+  /** Título del pie (opcional). */
+  title?: string;
+  /** Descripción del pie (opcional). */
+  subtitle?: string;
+};
+
 export type Service = {
   /** Identificador de la URL: /servicios/[slug] */
   slug: string;
@@ -33,6 +51,8 @@ export type Service = {
   howWeWork: { title: string; description: string }[];
   /** Nota opcional para fijar expectativas honestas. */
   note?: string;
+  /** Ejemplos de trabajos reales (portafolio) para este servicio. */
+  examples?: WebExample[];
 };
 
 export const services: Service[] = [
@@ -44,13 +64,14 @@ export const services: Service[] = [
       "Una presencia web clara, rápida y pensada para que tus clientes te encuentren y te escriban.",
     icon: MonitorSmartphone,
     summary:
-      "Sitios corporativos, cartas, catálogos y páginas de servicios que se ven bien en cualquier pantalla y conectan con WhatsApp y otras plataformas.",
+      "Sitios corporativos, landing pages, cartas, catálogos y páginas de servicios que se ven bien en cualquier pantalla y conectan con WhatsApp y otras plataformas.",
     whatIs:
-      "Diseñamos y desarrollamos el sitio web de tu negocio desde cero: la estructura, los textos, el diseño y la programación. El resultado es una página propia, que tú controlas, pensada para presentar lo que ofreces y facilitar que las personas te contacten.",
+      "Diseñamos y desarrollamos el sitio web de tu negocio desde cero: la estructura, los textos, el diseño y la programación. Puede ser un sitio completo de varias páginas o una landing page enfocada en una campaña, un lanzamiento o un servicio puntual. El resultado es una página propia, que tú controlas, pensada para presentar lo que ofreces y facilitar que las personas te contacten.",
     problem:
       "Muchos negocios dependen solo de redes sociales o de un perfil incompleto, y pierden clientes que buscan información clara antes de decidir. Sin una web propia es difícil mostrar tu carta, tus servicios, tus horarios o tu ubicación de forma ordenada y confiable.",
     includes: [
       "Sitios corporativos, cartas digitales, catálogos y páginas de servicios.",
+      "Landing pages para campañas, lanzamientos o promociones puntuales.",
       "Galerías de fotos, reseñas, ubicación en mapa y horarios de atención.",
       "Integración con WhatsApp, Rappi u otras plataformas que ya uses.",
       "Formularios de contacto y de solicitud de cotización.",
@@ -83,6 +104,15 @@ export const services: Service[] = [
         title: "Publicamos y acompañamos",
         description:
           "Dejamos tu web en línea y te explicamos cómo mantenerla y mejorarla.",
+      },
+    ],
+    examples: [
+      {
+        image: "/ejemplos/luciana-ortecho.webp",
+        alt: "Sitio web de Luciana Ortecho, nutricionista",
+        host: "luciana-ortecho.netlify.app",
+        title: "Luciana Ortecho — Nutricionista",
+        subtitle: "Sitio web profesional para una nutricionista.",
       },
     ],
   },
@@ -136,6 +166,14 @@ export const services: Service[] = [
       },
     ],
     note: "Una automatización bien hecha ahorra tiempo y ordena la atención, pero no reemplaza a tu equipo: el asistente atiende lo repetitivo y deriva a una persona cuando el caso lo necesita.",
+    examples: [
+      {
+        image: "/ejemplos/chatbot-whatsapp.webp",
+        alt: "Asistente de WhatsApp con IA atendiendo y clasificando los mensajes de un negocio",
+        title: "Asistente de WhatsApp con IA",
+        subtitle: "Atiende y ordena los mensajes; deriva a una persona cuando hace falta.",
+      },
+    ],
   },
   {
     slug: "automatizacion-procesos",
@@ -183,6 +221,14 @@ export const services: Service[] = [
         title: "Medimos y mejoramos",
         description:
           "Verificamos que ahorre tiempo de verdad y la ajustamos cuando hace falta.",
+      },
+    ],
+    examples: [
+      {
+        image: "/ejemplos/automatizacion.webp",
+        alt: "Procesos administrativos automatizados y herramientas conectadas",
+        title: "Procesos automatizados",
+        subtitle: "Tareas repetitivas conectadas y resueltas solas.",
       },
     ],
   },
@@ -235,6 +281,14 @@ export const services: Service[] = [
           "Te enseñamos a usarlo para que se vuelva parte del día a día.",
       },
     ],
+    examples: [
+      {
+        image: "/ejemplos/crm.webp",
+        alt: "CRM que reúne clientes, conversaciones y ventas en un solo lugar",
+        title: "CRM a la medida",
+        subtitle: "Clientes, conversaciones y ventas en un solo lugar.",
+      },
+    ],
   },
   {
     slug: "dashboards",
@@ -284,6 +338,14 @@ export const services: Service[] = [
           "Ajustamos el dashboard a medida que cambian tus necesidades.",
       },
     ],
+    examples: [
+      {
+        image: "/ejemplos/dashboard.webp",
+        alt: "Dashboard con ventas, clientes e indicadores del negocio",
+        title: "Dashboards para negocios",
+        subtitle: "Ventas, clientes y rendimiento a la vista.",
+      },
+    ],
   },
   {
     slug: "servicio-tecnico",
@@ -331,6 +393,14 @@ export const services: Service[] = [
         title: "Mejoramos",
         description:
           "Proponemos y aplicamos ajustes para que la solución siga siendo útil.",
+      },
+    ],
+    examples: [
+      {
+        image: "/ejemplos/servicio-tecnico.webp",
+        alt: "Monitoreo, soporte y mantenimiento continuo de los sistemas del negocio",
+        title: "Servicio técnico continuo",
+        subtitle: "Mantenimiento, soporte y mejoras en el tiempo.",
       },
     ],
   },

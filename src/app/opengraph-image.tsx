@@ -1,9 +1,19 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+// Genera la imagen una sola vez en el build (compatible con output: export).
+export const dynamic = "force-static";
 
 export const alt =
   "Manto — Automatización y desarrollo web para empresas y negocios";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// Logo embebido en base64 (se lee en tiempo de build).
+const logoSrc = `data:image/png;base64,${readFileSync(
+  join(process.cwd(), "public", "manto-logo.png"),
+).toString("base64")}`;
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -21,22 +31,10 @@ export default function OpenGraphImage() {
         }}
       >
         {/* Isotipo + marca */}
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="8" fill="#0E4D49" />
-            <path
-              d="M11 30 V14 L20 23 L29 14 V30"
-              stroke="#F6F4EE"
-              strokeWidth="3.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path d="M6.5 21 H14.5" stroke="#C75B39" strokeWidth="3.2" strokeLinecap="round" />
-            <path d="M25.5 21 H33.5" stroke="#C75B39" strokeWidth="3.2" strokeLinecap="round" />
-            <circle cx="11" cy="14" r="2.4" fill="#C75B39" />
-            <circle cx="29" cy="14" r="2.4" fill="#C75B39" />
-          </svg>
-          <div style={{ fontSize: 40, fontWeight: 600, color: "#161412" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoSrc} height={84} width={118} alt="" />
+          <div style={{ fontSize: 44, fontWeight: 600, color: "#161412" }}>
             Manto
           </div>
         </div>

@@ -17,11 +17,12 @@ type Fields = {
 
 type Errors = Partial<Record<keyof Fields, string>>;
 
-const contactOptions = [
-  "WhatsApp",
-  "Llamada telefónica",
-  "Correo electrónico",
+const serviceOptions = [
+  ...services.map((s) => s.shortTitle),
+  "Aún no lo tengo claro",
 ];
+
+const contactOptions = ["WhatsApp", "Llamada telefónica", "Correo electrónico"];
 
 const initial: Fields = {
   name: "",
@@ -73,10 +74,10 @@ export function ContactForm() {
     const found = validate(values);
     setErrors(found);
     if (Object.keys(found).length > 0) {
-      // Lleva el foco al primer campo con error.
       const firstKey = Object.keys(found)[0];
       const el = document.getElementById(`field-${firstKey}`);
       el?.focus();
+      el?.scrollIntoView({ block: "center", behavior: "smooth" });
       return;
     }
     const url = whatsappUrl(buildMessage(values));
@@ -90,14 +91,9 @@ export function ContactForm() {
     );
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="space-y-5">
+    <form noValidate onSubmit={handleSubmit} className="space-y-6">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field
-          id="field-name"
-          label="Nombre"
-          error={errors.name}
-          required
-        >
+        <Field id="field-name" label="Nombre" error={errors.name} required>
           <input
             id="field-name"
             name="name"
@@ -112,12 +108,7 @@ export function ContactForm() {
           />
         </Field>
 
-        <Field
-          id="field-business"
-          label="Negocio"
-          error={errors.business}
-          required
-        >
+        <Field id="field-business" label="Negocio" error={errors.business} required>
           <input
             id="field-business"
             name="business"
@@ -133,66 +124,29 @@ export function ContactForm() {
         </Field>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field
-          id="field-service"
-          label="Servicio de interés"
-          error={errors.service}
-          required
-        >
-          <select
-            id="field-service"
-            name="service"
-            value={values.service}
-            onChange={(e) => update("service", e.target.value)}
-            aria-invalid={!!errors.service}
-            aria-describedby={errors.service ? "error-service" : undefined}
-            className={fieldClass(!!errors.service)}
-          >
-            <option value="" disabled>
-              Elige un servicio
-            </option>
-            {services.map((s) => (
-              <option key={s.slug} value={s.shortTitle}>
-                {s.shortTitle}
-              </option>
-            ))}
-            <option value="Aún no lo tengo claro">Aún no lo tengo claro</option>
-          </select>
-        </Field>
-
-        <Field
-          id="field-contactPref"
-          label="Medio de contacto preferido"
-          error={errors.contactPref}
-          required
-        >
-          <select
-            id="field-contactPref"
-            name="contactPref"
-            value={values.contactPref}
-            onChange={(e) => update("contactPref", e.target.value)}
-            aria-invalid={!!errors.contactPref}
-            aria-describedby={
-              errors.contactPref ? "error-contactPref" : undefined
-            }
-            className={fieldClass(!!errors.contactPref)}
-          >
-            {contactOptions.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
-        </Field>
-      </div>
-
-      <Field
-        id="field-message"
-        label="Descripción"
-        error={errors.message}
+      <ChipGroup
+        id="field-service"
+        legend="¿Qué servicio te interesa?"
+        name="service"
+        options={serviceOptions}
+        value={values.service}
+        onChange={(v) => update("service", v)}
+        error={errors.service}
         required
-      >
+      />
+
+      <ChipGroup
+        id="field-contactPref"
+        legend="¿Cómo prefieres que te contactemos?"
+        name="contactPref"
+        options={contactOptions}
+        value={values.contactPref}
+        onChange={(v) => update("contactPref", v)}
+        error={errors.contactPref}
+        required
+      />
+
+      <Field id="field-message" label="Cuéntanos qué necesitas" error={errors.message} required>
         <textarea
           id="field-message"
           name="message"
@@ -202,7 +156,7 @@ export function ContactForm() {
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "error-message" : undefined}
           className={cn(fieldClass(!!errors.message), "resize-y")}
-          placeholder="Cuéntanos qué necesitas: qué hace tu negocio, qué problema quieres resolver y cualquier detalle útil."
+          placeholder="¿Qué hace tu negocio? ¿Qué problema quieres resolver? Cualquier detalle útil nos ayuda a darte una mejor respuesta."
         />
       </Field>
 
@@ -216,6 +170,77 @@ export function ContactForm() {
         Enviar por WhatsApp
       </Button>
     </form>
+  );
+}
+
+/** Selector de una opción presentado como chips (radios accesibles). */
+function ChipGroup({
+  id,
+  legend,
+  name,
+  options,
+  value,
+  onChange,
+  error,
+  required,
+}: {
+  id: string;
+  legend: string;
+  name: string;
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
+  required?: boolean;
+}) {
+  const errorId = `error-${id.replace("field-", "")}`;
+  return (
+    <fieldset id={id} tabIndex={-1} className="focus:outline-none">
+      <legend className="text-sm font-medium text-ink">
+        {legend}
+        {required && <span className="ml-0.5 text-arcilla-500">*</span>}
+      </legend>
+      <div
+        className="mt-2.5 flex flex-wrap gap-2"
+        role="radiogroup"
+        aria-invalid={!!error}
+        aria-describedby={error ? errorId : undefined}
+      >
+        {options.map((opt) => {
+          const selected = value === opt;
+          return (
+            <label
+              key={opt}
+              className={cn(
+                "cursor-pointer select-none rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-petroleo has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-bone",
+                selected
+                  ? "border-petroleo bg-petroleo text-bone-50 shadow-sm shadow-petroleo/20"
+                  : "border-bone-300 bg-bone-50 text-ink-muted hover:border-petroleo/40 hover:text-ink",
+              )}
+            >
+              <input
+                type="radio"
+                name={name}
+                value={opt}
+                checked={selected}
+                onChange={() => onChange(opt)}
+                className="sr-only"
+              />
+              {opt}
+            </label>
+          );
+        })}
+      </div>
+      {error && (
+        <p
+          id={errorId}
+          className="mt-2 inline-flex items-center gap-1.5 text-sm text-arcilla-600"
+        >
+          <AlertCircle className="h-4 w-4" aria-hidden="true" />
+          {error}
+        </p>
+      )}
+    </fieldset>
   );
 }
 

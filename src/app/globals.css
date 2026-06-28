@@ -44,6 +44,14 @@
     @apply not-sr-only fixed left-4 top-4 z-[60] rounded bg-petroleo px-4 py-2 text-sm font-medium text-bone-50;
   }
 
+  /* Vista previa de sitio que se desplaza sola (portafolio) */
+  .preview-scroll {
+    animation: preview-scroll 16s ease-in-out infinite alternate;
+  }
+  .group:hover .preview-scroll {
+    animation-play-state: paused;
+  }
+
   /* Animación de aparición al hacer scroll */
   .reveal {
     opacity: 0;
@@ -55,6 +63,16 @@
   .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Desplazamiento automático de la vista previa de portafolio */
+@keyframes preview-scroll {
+  from {
+    background-position: 50% 0%;
+  }
+  to {
+    background-position: 50% 100%;
   }
 }
 
@@ -74,5 +92,8 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .preview-scroll {
+    animation: none !important;
   }
 }

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Isotipo } from "@/components/Logo";
+import { LogoMark } from "@/components/Logo";
 
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-      <Isotipo className="h-16 w-16 text-petroleo" title="Manto" />
+      <LogoMark className="h-16" alt="Manto" />
       <p className="mt-6 font-display text-sm font-semibold uppercase tracking-[0.14em] text-arcilla-600">
         Error 404
       </p>

@@ -11,7 +11,8 @@ import {
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { Isotipo } from "@/components/Logo";
+import { LogoMark } from "@/components/Logo";
+import { WeavePattern } from "@/components/Weave";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -109,8 +110,13 @@ export default function NosotrosPage() {
             </p>
           </div>
           <div className="lg:col-span-5">
-            <div className="flex h-full items-center justify-center rounded-lg border border-bone-300 bg-bone-200/40 p-10">
-              <Isotipo className="h-28 w-28 text-petroleo" title="Isotipo de Manto" />
+            <div className="relative flex h-full min-h-[280px] items-center justify-center overflow-hidden rounded-lg bg-petroleo p-10">
+              <WeavePattern className="absolute inset-0 text-bone-50/[0.07]" />
+              <LogoMark
+                variant="light"
+                className="relative h-44 w-auto sm:h-52"
+                alt="Logo de Manto"
+              />
             </div>
           </div>
         </div>

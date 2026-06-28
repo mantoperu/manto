@@ -11,6 +11,7 @@ import {
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { WebExample } from "@/components/WebExample";
 import { ButtonLink } from "@/components/ui/Button";
 import {
   services,
@@ -68,7 +69,16 @@ export default async function ServiceDetailPage({
 
   return (
     <>
-      <PageHero eyebrow="Servicio" title={service.title} description={service.tagline}>
+      <PageHero
+        eyebrow="Servicio"
+        title={service.title}
+        description={service.tagline}
+        aside={
+          service.examples && service.examples.length > 0 ? (
+            <WebExample example={service.examples[0]} />
+          ) : undefined
+        }
+      >
         <div className="flex flex-wrap items-center gap-4">
           <span className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-petroleo text-bone-50">
             <Icon className="h-6 w-6" aria-hidden="true" />

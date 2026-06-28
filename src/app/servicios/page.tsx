@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
 import { ButtonLink } from "@/components/ui/Button";
-import { Reveal } from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Motion";
 import { services } from "@/lib/services";
 import { site, whatsappUrl, defaultQuoteMessage } from "@/lib/site";
 
@@ -29,6 +29,16 @@ export default function ServiciosPage() {
         eyebrow="Servicios"
         title="Tecnología útil para empresas y negocios"
         description="Cada servicio resuelve un problema concreto. Puedes empezar por uno o combinarlos. No publicamos precios porque cada solución se cotiza según su alcance."
+        aside={
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/ejemplos/servicios.webp"
+            alt="Manto une el desarrollo web y la automatización en torno a los servicios de un negocio"
+            width={1200}
+            height={675}
+            className="w-full mix-blend-multiply"
+          />
+        }
       >
         <ButtonLink href={whatsappUrl(defaultQuoteMessage)} size="lg">
           <MessageCircle className="h-5 w-5" aria-hidden="true" />
@@ -37,13 +47,13 @@ export default function ServiciosPage() {
       </PageHero>
 
       <Section>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <Reveal key={service.slug} delay={(i % 3) * 80}>
+        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <StaggerItem key={service.slug} className="h-full">
               <ServiceCard service={service} />
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
         <div className="mt-12 rounded-lg border border-bone-300 bg-bone-200/40 p-6 sm:p-8">
           <h2 className="font-display text-xl font-semibold text-ink">
