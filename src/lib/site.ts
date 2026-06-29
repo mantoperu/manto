@@ -13,14 +13,14 @@ export const site = {
   // Descripción corta reutilizable (meta description por defecto).
   description:
     "Manto es una agencia peruana de automatización y desarrollo web para empresas y negocios de cualquier tamaño. Páginas web profesionales, atención por WhatsApp con IA, automatización de procesos, CRM y dashboards.",
-  // Dominio de producción (provisional). Reemplázalo antes de publicar.
-  url: "https://www.manto.pe",
+  // Dominio de producción.
+  url: "https://mantoperu.com",
   locale: "es_PE",
   country: "Perú",
 
   // Datos de contacto (provisionales — reemplazar antes de publicar).
   contact: {
-    email: "hola@manto.pe",
+    email: "contacto@mantoperu.com",
     cityRegion: "Perú",
   },
 
