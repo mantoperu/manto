@@ -20,6 +20,8 @@ export type WebExample = {
    * muestra como una imagen enmarcada estática.
    */
   host?: string;
+  /** URL real del sitio. Si se define, muestra un botón "Visitar web". */
+  url?: string;
   /** Título del pie (opcional). */
   title?: string;
   /** Descripción del pie (opcional). */
@@ -111,6 +113,7 @@ export const services: Service[] = [
         image: "/ejemplos/luciana-ortecho.webp",
         alt: "Sitio web de Luciana Ortecho, nutricionista",
         host: "luciana-ortecho.netlify.app",
+        url: "https://luciana-ortecho.netlify.app",
         title: "Luciana Ortecho — Nutricionista",
         subtitle: "Sitio web profesional para una nutricionista.",
       },
