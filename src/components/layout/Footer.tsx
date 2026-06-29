@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, Mail } from "lucide-react";
+import { MessageCircle, Mail, Instagram } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Container } from "@/components/ui/Container";
 import { services } from "@/lib/services";
@@ -41,6 +41,17 @@ export function Footer() {
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 {site.contact.email}
               </a>
+              {site.social.instagram && (
+                <a
+                  href={`https://instagram.com/${site.social.instagram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-ink-muted hover:text-ink"
+                >
+                  <Instagram className="h-4 w-4" aria-hidden="true" />@
+                  {site.social.instagram}
+                </a>
+              )}
             </div>
           </div>
 

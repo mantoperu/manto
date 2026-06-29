@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { MessageCircle, CalendarClock, Mail, Clock } from "lucide-react";
+import {
+  MessageCircle,
+  CalendarClock,
+  Mail,
+  Clock,
+  Instagram,
+} from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
@@ -115,6 +121,25 @@ export default function ContactoPage() {
                       </a>
                     </div>
                   </li>
+                  {site.social.instagram && (
+                    <li className="flex gap-3">
+                      <Instagram
+                        className="mt-0.5 h-5 w-5 flex-none text-petroleo"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <p className="font-medium text-ink">Instagram</p>
+                        <a
+                          href={`https://instagram.com/${site.social.instagram}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-ink-muted hover:text-petroleo"
+                        >
+                          @{site.social.instagram}
+                        </a>
+                      </div>
+                    </li>
+                  )}
                   <li className="flex gap-3">
                     <Clock
                       className="mt-0.5 h-5 w-5 flex-none text-petroleo"

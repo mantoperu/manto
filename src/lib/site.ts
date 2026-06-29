@@ -32,8 +32,8 @@ export const site = {
   },
 
   social: {
-    // Agrega aquí perfiles reales cuando existan.
-    instagram: "",
+    // Solo el usuario (sin @). La URL y el "@" se construyen en los componentes.
+    instagram: "manto_peru",
     linkedin: "",
   },
 } as const;
