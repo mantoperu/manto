@@ -26,9 +26,9 @@ export const site = {
 
   whatsapp: {
     // Cómo se muestra el número al usuario.
-    display: "947 381 615",
+    display: "+51 931 229 608",
     // Formato internacional para los enlaces wa.me (Perú = 51).
-    intl: "51947381615",
+    intl: "51931229608",
   },
 
   social: {
