@@ -3,7 +3,7 @@
 ## Versión publicada (20 de octubre de 2026)
 
 La versión publicada está en `site-static/` y reproduce el contenido de
-`manto-web.zip`. `npm run build` la copia a `out/`, la carpeta que publica Netlify.
+`manto-web (1).zip`. `npm run build` la copia a `out/`, la carpeta que publica Netlify.
 El ZIP contiene HTML, CSS, JavaScript compilado e imágenes; no contiene los
 archivos fuente de esta versión.
 

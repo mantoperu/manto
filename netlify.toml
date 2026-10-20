@@ -1,4 +1,4 @@
-# Publica la exportación estática entregada en manto-web.zip.
+# Publica la exportación estática entregada en manto-web (1).zip.
 
 [build]
   command = "npm run build"
