@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://mantoperu.com
+Sitemap: https://mantoperu.com/sitemap.xml

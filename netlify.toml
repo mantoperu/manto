@@ -1,10 +1,10 @@
-# Configuración de despliegue para Netlify.
-# Netlify detecta Next.js automáticamente e instala su runtime oficial
-# (@netlify/plugin-nextjs); no es necesario declararlo aquí.
+# Publica la exportación estática entregada en manto-web.zip.
 
 [build]
   command = "npm run build"
+  publish = "out"
 
 [build.environment]
   # Versión de Node usada en el build (LTS estable y compatible).
   NODE_VERSION = "20"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"

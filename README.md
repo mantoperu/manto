@@ -1,5 +1,20 @@
 # Manto — Sitio web
 
+## Versión publicada (20 de octubre de 2026)
+
+La versión publicada está en `site-static/` y reproduce el contenido de
+`manto-web.zip`. `npm run build` la copia a `out/`, la carpeta que publica Netlify.
+El ZIP contiene HTML, CSS, JavaScript compilado e imágenes; no contiene los
+archivos fuente de esta versión.
+
+El proyecto Next.js anterior se conserva en `src/` como referencia.
+Los comandos `npm run dev`, `npm run lint` y `npm run typecheck` corresponden a
+ese proyecto anterior; `npm run build:source` permite compilarlo por separado,
+pero no genera la versión entregada en el ZIP. Para actualizar la publicación,
+reemplaza el contenido de `site-static/` por una nueva exportación completa.
+
+La documentación que sigue describe el proyecto fuente anterior.
+
 Sitio web público y multipágina de **Manto**, agencia peruana de automatización
 y desarrollo web para empresas y negocios.
 
